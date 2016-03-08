@@ -15,6 +15,9 @@ def main():
 
     # Load
     df = pd.read_csv(args.i, sep="\t")
+
+    # Drop NA
+    df = df.loc[~pd.isnull(df[args.col]), :]
     
     # Calc sum of posterior probabilities
     post_sum = reduce(sum_log10, list(df[args.col]))
@@ -23,7 +26,7 @@ def main():
     df["post_prob"] = df[args.col].apply(lambda logbf: (10**logbf) / (10**post_sum))
     
     # Add cumulative posterior prob
-    df = df.sort("post_prob", ascending=False)
+    df = df.sort_values("post_prob", ascending=False)
     df["post_prob_cumsum"] = np.cumsum(df["post_prob"])
 
     df.to_csv(args.o, sep="\t", index=False)
