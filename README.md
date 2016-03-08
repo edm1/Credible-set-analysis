@@ -3,7 +3,7 @@ Calculate credible sets from GWAS bayes factors
 
 
 ```
-usage: credible-set-analysis.py [-h] --i <input> --o <output>
+usage: credible_set_analysis.py [-h] --i <input> --o <output>
                                 [--col <col name>]
 
 Calculate credible set.
